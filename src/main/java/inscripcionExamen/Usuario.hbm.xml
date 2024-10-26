@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="inscripcionExamen.Usuario" table="usuarios">
+  <id column="id" name="id" type="int">
+   <generator class="increment"/>
+  </id>
+  <property column="nombre" generated="never" lazy="false" name="nombre"
+   not-null="true" type="string"/>
+  <property column="password" generated="never" lazy="false"
+   name="password" not-null="true" type="string"/>
+  <property column="perfil" generated="never" lazy="false" name="perfil"
+   not-null="true" type="int"/>
+  <property column="habilitado" generated="never" lazy="false"
+   name="habilitado" not-null="true" type="boolean"/>
+ </class>
+</hibernate-mapping>
