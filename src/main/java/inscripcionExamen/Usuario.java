@@ -1,51 +1,76 @@
 package inscripcionExamen;
 
-import jakarta.persistence.*;  // Si usas JPA en versiones recientes (alternativamente, usa javax.persistence.* en versiones más antiguas)
-import java.io.Serializable;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID autogenerado
-    @Column(name = "id")
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    private String contrasena;
     private String nombre;
+    private String apellido;
+    private String email;
+    
+    @ManyToOne
+    @JoinColumn(name = "rol_id", nullable = false)
+    private Rol rol;
 
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "perfil", nullable = false)
-    private int perfil;
-
-    @Column(name = "habilitado", nullable = false)
     private boolean habilitado;
+    private Timestamp fechaCreacion;
 
-    // Constructor sin parámetros (obligatorio para JPA/Hibernate)
-    public Usuario() {
-    }
+    @OneToMany(mappedBy = "docente1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Examen> examenesDocente1;
 
-    // Constructor con parámetros
-    public Usuario(int id, String nombre, String password, int perfil, boolean habilitado) {
+    @OneToMany(mappedBy = "docente2", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Examen> examenesDocente2;
+
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InscripcionMateria> inscripciones;
+
+    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<InscripcionMateria> inscripcionesMaterias;
+
+    public Usuario() {}
+
+    public Usuario(Long id, String contrasena, String nombre, String apellido, String email,
+                   Rol rol, boolean habilitado, Timestamp fechaCreacion,
+                   List<Examen> examenesDocente1, List<Examen> examenesDocente2,
+                   List<InscripcionMateria> inscripciones, List<InscripcionMateria> inscripcionesMaterias) {
         this.id = id;
+        this.contrasena = contrasena;
         this.nombre = nombre;
-        this.password = password;
-        this.perfil = perfil;
+        this.apellido = apellido;
+        this.email = email;
+        this.rol = rol;
         this.habilitado = habilitado;
+        this.fechaCreacion = fechaCreacion;
+        this.examenesDocente1 = examenesDocente1;
+        this.examenesDocente2 = examenesDocente2;
+        this.inscripciones = inscripciones;
+        this.inscripcionesMaterias = inscripcionesMaterias;
     }
 
-    // Getters y setters
-    public int getId() {
+    // Getters y Setters
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getNombre() {
@@ -56,20 +81,28 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getPassword() {
-        return password;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public int getPerfil() {
-        return perfil;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPerfil(int perfil) {
-        this.perfil = perfil;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public boolean isHabilitado() {
@@ -78,5 +111,45 @@ public class Usuario implements Serializable {
 
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
+    }
+
+    public Timestamp getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Timestamp fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public List<Examen> getExamenesDocente1() {
+        return examenesDocente1;
+    }
+
+    public void setExamenesDocente1(List<Examen> examenesDocente1) {
+        this.examenesDocente1 = examenesDocente1;
+    }
+
+    public List<Examen> getExamenesDocente2() {
+        return examenesDocente2;
+    }
+
+    public void setExamenesDocente2(List<Examen> examenesDocente2) {
+        this.examenesDocente2 = examenesDocente2;
+    }
+
+    public List<InscripcionMateria> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<InscripcionMateria> inscripciones) {
+        this.inscripciones = inscripciones;
+    }
+
+    public List<InscripcionMateria> getInscripcionesMaterias() {
+        return inscripcionesMaterias;
+    }
+
+    public void setInscripcionesMaterias(List<InscripcionMateria> inscripcionesMaterias) {
+        this.inscripcionesMaterias = inscripcionesMaterias;
     }
 }
