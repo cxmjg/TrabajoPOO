@@ -10,18 +10,6 @@
         <!-- Mapeo de las propiedades -->
         <property name="nombre" column="nombre" type="string"/>
         <property name="fechaCreacion" column="fecha_creacion" type="timestamp"/>
-
-        <!-- Relación One-to-Many con Inscripciones a Materias -->
-        <set name="inscripciones" table="inscripciones_materias" cascade="all">
-            <key column="materia_id"/>
-            <one-to-many class="inscripcionExamen.InscripcionMateria"/>
-        </set>
-
-        <!-- Relación One-to-Many con Examenes -->
-        <set name="examenes" table="examenes" cascade="all">
-            <key column="materia_id"/>
-            <one-to-many class="inscripcionExamen.Examen"/>
-        </set>
        
     </class>
 </hibernate-mapping>

@@ -10,7 +10,6 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String contrasena;
     private String nombre;
     private String apellido;
@@ -19,28 +18,13 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;
-
+    
     private boolean habilitado;
     private Timestamp fechaCreacion;
-
-    @OneToMany(mappedBy = "docente1", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Examen> examenesDocente1;
-
-    @OneToMany(mappedBy = "docente2", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Examen> examenesDocente2;
-
-    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InscripcionMateria> inscripciones;
-
-    @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<InscripcionMateria> inscripcionesMaterias;
-
     public Usuario() {}
 
     public Usuario(Long id, String contrasena, String nombre, String apellido, String email,
-                   Rol rol, boolean habilitado, Timestamp fechaCreacion,
-                   List<Examen> examenesDocente1, List<Examen> examenesDocente2,
-                   List<InscripcionMateria> inscripciones, List<InscripcionMateria> inscripcionesMaterias) {
+                   Rol rol, boolean habilitado, Timestamp fechaCreacion) {
         this.id = id;
         this.contrasena = contrasena;
         this.nombre = nombre;
@@ -49,10 +33,6 @@ public class Usuario {
         this.rol = rol;
         this.habilitado = habilitado;
         this.fechaCreacion = fechaCreacion;
-        this.examenesDocente1 = examenesDocente1;
-        this.examenesDocente2 = examenesDocente2;
-        this.inscripciones = inscripciones;
-        this.inscripcionesMaterias = inscripcionesMaterias;
     }
 
     // Getters y Setters
@@ -121,35 +101,4 @@ public class Usuario {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public List<Examen> getExamenesDocente1() {
-        return examenesDocente1;
-    }
-
-    public void setExamenesDocente1(List<Examen> examenesDocente1) {
-        this.examenesDocente1 = examenesDocente1;
-    }
-
-    public List<Examen> getExamenesDocente2() {
-        return examenesDocente2;
-    }
-
-    public void setExamenesDocente2(List<Examen> examenesDocente2) {
-        this.examenesDocente2 = examenesDocente2;
-    }
-
-    public List<InscripcionMateria> getInscripciones() {
-        return inscripciones;
-    }
-
-    public void setInscripciones(List<InscripcionMateria> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
-
-    public List<InscripcionMateria> getInscripcionesMaterias() {
-        return inscripcionesMaterias;
-    }
-
-    public void setInscripcionesMaterias(List<InscripcionMateria> inscripcionesMaterias) {
-        this.inscripcionesMaterias = inscripcionesMaterias;
-    }
 }

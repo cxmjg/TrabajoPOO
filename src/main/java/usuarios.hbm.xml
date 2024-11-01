@@ -1,47 +1,23 @@
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping">
 <hibernate-mapping>
-    <class name="inscripcionExamen.Usuario" table="usuarios">
-        
-        <!-- Mapeo de la clave primaria -->
-        <id name="id" column="id">
-            <generator class="identity"/>
-        </id>
-
-        <!-- Mapeo de las propiedades -->
-        <property name="email" column="email" type="string"/>
-        <property name="contrasena" column="contrasena" type="string"/>
-        <property name="nombre" column="nombre" type="string"/>
-        <property name="apellido" column="apellido" type="string"/>
-        <property name="habilitado" column="habilitado" type="boolean"/>
-        <property name="fechaCreacion" column="fecha_creacion" type="timestamp"/>
-
-        <!-- Relación Many-to-One con Rol -->
-        <many-to-one name="rol" class="inscripcionExamen.Rol" column="rol_id" not-null="true"/>
-
-        <!-- Relación One-to-Many con InscripcionExamen -->
-        <set name="inscripciones" table="inscripciones_examen" cascade="all">
-            <key column="alumno_id"/>
-            <one-to-many class="inscripcionExamen.InscripcionExamen"/>
-        </set>
-
-         <!-- Relación One-to-Many con Exámenes como Docente 1 -->
-        <set name="examenesDocente1" table="examenes" cascade="all">
-            <key column="docente1_id"/>
-            <one-to-many class="inscripcionExamen.Examen"/>
-        </set>
-
-        <!-- Relación One-to-Many con Exámenes como Docente 2 -->
-        <set name="examenesDocente2" table="examenes" cascade="all">
-            <key column="docente2_id"/>
-            <one-to-many class="inscripcionExamen.Examen"/>
-        </set>
-
-        <!-- Relación One-to-Many con Inscripciones a Materias -->
-        <set name="inscripcionesMaterias" table="inscripciones_materias" cascade="all">
-            <key column="alumno_id"/>
-            <one-to-many class="inscripcionExamen.InscripcionMateria"/>
-        </set>
-
-        
-    </class>
+ <class name="inscripcionExamen.Usuario" table="usuarios">
+  <!-- Mapeo de la clave primaria -->
+  <id column="id" name="id">
+   <generator class="identity"/>
+  </id>
+  <!-- Mapeo de las propiedades -->
+  <property column="email" generated="never" lazy="false" name="email" type="string"/>
+  <property column="contrasena" generated="never" lazy="false"
+   name="contrasena" not-null="true" type="string"/>
+  <property column="nombre" generated="never" lazy="false" name="nombre"
+   not-null="true" type="string"/>
+  <property column="apellido" generated="never" lazy="false"
+   name="apellido" type="string"/>
+  <property column="habilitado" generated="never" lazy="false"
+   name="habilitado" not-null="true" type="boolean"/>
+  <property column="fecha_creacion" generated="never" lazy="false"
+   name="fechaCreacion" not-null="true" type="timestamp"/>
+ </class>
 </hibernate-mapping>

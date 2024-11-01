@@ -1,4 +1,7 @@
 package inscripcionExamen;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 import java.awt.EventQueue;
 
@@ -43,18 +46,26 @@ import java.awt.GridLayout;
 import com.jgoodies.forms.layout.Sizes;
 import javax.swing.JLayeredPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JCheckBox;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
 public class GUI {
 
 	private JFrame frame;
 	private JTextField valorUsuario;
 	private JPasswordField valorPassword;
-	private final JToolBar barraSuperior = new JToolBar();
-	private JTextField valorFechaInicioMesa;
-	private JTextField valorFechaFinMesa;
-	private JTextField valorFechaInicioInscripcion;
-	private JTextField valorFechaFinInscripcion;
+	private JTabbedPane tabbedPane;
 	private JTable table;
+	private JPanel panelEdicionMesa = new JPanel();
+	private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	private JFormattedTextField valorFechaInicioMesa = new JFormattedTextField(dateFormat);
+	private JFormattedTextField valorFechaFinMesa = new JFormattedTextField(dateFormat);
+	private JFormattedTextField valorFechaInicioInscripcionMesa = new JFormattedTextField(dateFormat);
+	private JFormattedTextField valorFechaFinInscripcionMesa = new JFormattedTextField(dateFormat);
 
 	/**
 	 * Launch the application.
@@ -90,7 +101,7 @@ public class GUI {
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		JPanel panelLogin = new JPanel();
-		frame.getContentPane().add(panelLogin, "name_5315632412400");
+		frame.getContentPane().add(panelLogin, "name_71123270518800");
 		GridBagLayout gbl_panelLogin = new GridBagLayout();
 		gbl_panelLogin.columnWidths = new int[]{768, 0};
 		gbl_panelLogin.rowHeights = new int[]{505, 0};
@@ -171,183 +182,203 @@ public class GUI {
 		gbc_btnRecuperarPassword.gridy = 9;
 		frameLogin.add(btnRecuperarPassword, gbc_btnRecuperarPassword);
 		
-		JPanel panelApp = new JPanel();
-		frame.getContentPane().add(panelApp, "name_5315642071372");
-		panelApp.setLayout(new BoxLayout(panelApp, BoxLayout.X_AXIS));
-		
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		panelApp.add(splitPane);
-		
-		JButton btnMesas = new JButton("Mesas");
-		splitPane.setLeftComponent(barraSuperior);
-		barraSuperior.add(btnMesas);
-		btnMesas.setMargin(new Insets(2, 40, 2, 40));
-		btnMesas.setSize(new Dimension(100, 50));
-		btnMesas.setForeground(new Color(61, 56, 70));
-		btnMesas.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		JButton btnExamenes = new JButton("Examenes");
-		barraSuperior.add(btnExamenes);
-		btnExamenes.setMargin(new Insets(2, 40, 2, 40));
-		btnExamenes.setSize(new Dimension(100, 50));
-		btnExamenes.setForeground(new Color(61, 56, 70));
-		btnExamenes.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		JButton btnMaterias = new JButton("Materias");
-		barraSuperior.add(btnMaterias);
-		btnMaterias.setMargin(new Insets(2, 40, 2, 40));
-		btnMaterias.setSize(new Dimension(100, 50));
-		btnMaterias.setForeground(new Color(61, 56, 70));
-		btnMaterias.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		JButton btnUsuarios = new JButton("Usuarios");
-		barraSuperior.add(btnUsuarios);
-		btnUsuarios.setMargin(new Insets(2, 40, 2, 40));
-		btnUsuarios.setSize(new Dimension(100, 50));
-		btnUsuarios.setForeground(new Color(61, 56, 70));
-		btnUsuarios.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		JButton btnSalir = new JButton("Salir");
-		barraSuperior.add(btnSalir);
-		btnSalir.setMargin(new Insets(2, 40, 2, 40));
-		btnSalir.setSize(new Dimension(100, 50));
-		btnSalir.setForeground(new Color(61, 56, 70));
-		btnSalir.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		JPanel panelContenidoAdministrador = new JPanel();
-		splitPane.setRightComponent(panelContenidoAdministrador);
-		panelContenidoAdministrador.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("821px"),},
-			new RowSpec[] {
-				RowSpec.decode("fill:468px"),}));
-		
-		JLayeredPane layeredPane = new JLayeredPane();
-		panelContenidoAdministrador.add(layeredPane, "1, 1, fill, fill");
-		layeredPane.setLayout(new CardLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		layeredPane.add(panel, "name_247005257390500");
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("fill:default:grow"),}));
-		
-		JSplitPane splitPane_1 = new JSplitPane();
-		panel.add(splitPane_1, "1, 2, left, top");
-		
-		JPanel panelMesasAcciones_1 = new JPanel();
-		splitPane_1.setLeftComponent(panelMesasAcciones_1);
-		panelMesasAcciones_1.setLayout(new BorderLayout(0, 0));
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, "name_71123281914100");
 		
 		JPanel panelMesas = new JPanel();
-		layeredPane.setLayer(panelMesas, 0);
-		layeredPane.add(panelMesas, "name_247005265931500");
-		panelMesas.setLayout(new FormLayout(new ColumnSpec[] {
+		tabbedPane.addTab("Mesas", null, panelMesas, null);
+		panelMesas.setLayout(new BoxLayout(panelMesas, BoxLayout.X_AXIS));
+		
+		JSplitPane splitPane = new JSplitPane();
+		panelMesas.add(splitPane);
+		
+		JSplitPane panelAccionesMesa = new JSplitPane();
+		panelAccionesMesa.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		splitPane.setLeftComponent(panelAccionesMesa);
+		
+		JPanel panelOpcionesMesa = new JPanel();
+		panelAccionesMesa.setLeftComponent(panelOpcionesMesa);
+		panelOpcionesMesa.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("default:grow"),
+				ColumnSpec.decode("default:grow"),
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
-				RowSpec.decode("fill:default:grow"),}));
-		
-		JSplitPane panelMesasContenido = new JSplitPane();
-		panelMesas.add(panelMesasContenido, "1, 1, fill, fill");
-		
-		JPanel panelMesasAcciones = new JPanel();
-		panelMesasContenido.setLeftComponent(panelMesasAcciones);
-		panelMesasAcciones.setLayout(new BorderLayout(0, 0));
-		
-		JSplitPane splitPane_2 = new JSplitPane();
-		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		panelMesasAcciones.add(splitPane_2);
-		
-		JPanel panelMesasOpciones = new JPanel();
-		splitPane_2.setLeftComponent(panelMesasOpciones);
-		panelMesasOpciones.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("228px:grow"),},
-			new RowSpec[] {
-				RowSpec.decode("fill:default"),
-				RowSpec.decode("fill:30px"),
-				RowSpec.decode("fill:30px"),}));
+				RowSpec.decode("10dlu"),
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JButton btnNuevaMesa = new JButton("Nueva Mesa");
-		btnNuevaMesa.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelMesasOpciones.add(btnNuevaMesa, "1, 1, fill, center");
+		btnNuevaMesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				visibilidadPanelModificacionMesa(true);
+			}
+		});
+		panelOpcionesMesa.add(btnNuevaMesa, "2, 2");
 		
-		JButton btnEditarMesa = new JButton("Editar Mesa");
-		btnEditarMesa.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelMesasOpciones.add(btnEditarMesa, "1, 2, fill, center");
+		JButton btnModificarMesa = new JButton("Modificar Mesa");
+		panelOpcionesMesa.add(btnModificarMesa, "2, 4");
 		
 		JButton btnEliminarMesa = new JButton("Eliminar Mesa");
-		btnEliminarMesa.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelMesasOpciones.add(btnEliminarMesa, "1, 3, fill, top");
+		panelOpcionesMesa.add(btnEliminarMesa, "2, 6");
 		
-		JPanel panelMesasFormulario = new JPanel();
-		splitPane_2.setRightComponent(panelMesasFormulario);
-		FormLayout fl_panelMesasFormulario = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("max(2dlu;default)"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("center:default:grow"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("50dlu:grow"),
-				ColumnSpec.decode("50dlu"),
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,},
+		JPanel panelEdicionMesaMaster = new JPanel();
+		panelAccionesMesa.setRightComponent(panelEdicionMesaMaster);
+		panelEdicionMesaMaster.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("250px"),},
 			new RowSpec[] {
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),
-				RowSpec.decode("20dlu"),});
-		fl_panelMesasFormulario.setColumnGroup(new int[] {2});
-		panelMesasFormulario.setLayout(fl_panelMesasFormulario);
+				RowSpec.decode("top:353px"),}));
 		
-		JLabel labelFechaInicioMesa = new JLabel("Fecha Inicio Mesa");
+		
+		panelEdicionMesaMaster.add(panelEdicionMesa, "1, 1, center, top");
+
+		panelEdicionMesa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("60dlu:grow"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("60dlu"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel labelFechaInicioMesa = new JLabel("Fecha Inicio de Mesa");
 		labelFechaInicioMesa.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMesasFormulario.add(labelFechaInicioMesa, "3, 2, center, default");
+		panelEdicionMesa.add(labelFechaInicioMesa, "2, 4, 3, 1");
 		
-		valorFechaInicioMesa = new JTextField();
-		panelMesasFormulario.add(valorFechaInicioMesa, "5, 2, 2, 1, fill, default");
-		valorFechaInicioMesa.setColumns(10);
+
 		
-		JLabel labelFechaFinMesa = new JLabel("Fecha Fin Mesa");
+		valorFechaInicioMesa.setToolTipText("Ej: 23-10-2024");
+		panelEdicionMesa.add(valorFechaInicioMesa, "2, 6, 3, 1, fill, default");
+		
+		JLabel labelFechaFinMesa = new JLabel("Fecha Fin de Mesa");
 		labelFechaFinMesa.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMesasFormulario.add(labelFechaFinMesa, "3, 3, center, default");
+		panelEdicionMesa.add(labelFechaFinMesa, "2, 10, 3, 1, center, default");
 		
-		valorFechaFinMesa = new JTextField();
-		panelMesasFormulario.add(valorFechaFinMesa, "5, 3, 2, 1, fill, default");
-		valorFechaFinMesa.setColumns(10);
 		
-		JLabel labelFechaInicioInscripcion = new JLabel("Fecha Inicio Inscripcion");
-		labelFechaInicioInscripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMesasFormulario.add(labelFechaInicioInscripcion, "3, 4, center, default");
+		valorFechaFinMesa.setToolTipText("Ej: 23-10-2024");
+		panelEdicionMesa.add(valorFechaFinMesa, "2, 12, 3, 1, fill, default");
 		
-		valorFechaInicioInscripcion = new JTextField();
-		panelMesasFormulario.add(valorFechaInicioInscripcion, "5, 4, 2, 1, fill, default");
-		valorFechaInicioInscripcion.setColumns(10);
+		JLabel labelFechaInicioInscripcionMesa = new JLabel("Fecha Inicio de Inscripcion");
+		labelFechaInicioInscripcionMesa.setHorizontalAlignment(SwingConstants.CENTER);
+		panelEdicionMesa.add(labelFechaInicioInscripcionMesa, "2, 16, 3, 1");
 		
-		JLabel labelFechaFinInscripcion = new JLabel("Fecha Fin Inscripcion");
-		labelFechaFinInscripcion.setHorizontalAlignment(SwingConstants.CENTER);
-		panelMesasFormulario.add(labelFechaFinInscripcion, "3, 5, center, default");
 		
-		valorFechaFinInscripcion = new JTextField();
-		panelMesasFormulario.add(valorFechaFinInscripcion, "5, 5, 2, 1, fill, default");
-		valorFechaFinInscripcion.setColumns(10);
+		valorFechaInicioInscripcionMesa.setToolTipText("Ej: 23-10-2024");
+		panelEdicionMesa.add(valorFechaInicioInscripcionMesa, "2, 18, 3, 1, fill, default");
+		
+		JLabel labelFechaFinInscripcionMesa = new JLabel("Fecha Fin de Inscripcion");
+		labelFechaFinInscripcionMesa.setHorizontalAlignment(SwingConstants.CENTER);
+		panelEdicionMesa.add(labelFechaFinInscripcionMesa, "2, 22, 3, 1");
+		
+		
+		panelEdicionMesa.add(valorFechaFinInscripcionMesa, "2, 24, 3, 1, fill, default");
 		
 		JButton btnCancelarMesa = new JButton("Cancelar");
-		panelMesasFormulario.add(btnCancelarMesa, "5, 7");
+		btnCancelarMesa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelarEdicionMesa();
+			}
+		});
+		panelEdicionMesa.add(btnCancelarMesa, "2, 28");
 		
 		JButton btnGuardarMesa = new JButton("Guardar");
-		panelMesasFormulario.add(btnGuardarMesa, "6, 7");
+		panelEdicionMesa.add(btnGuardarMesa, "4, 28");
 		
-		JPanel panelMesasTabla = new JPanel();
-		panelMesasContenido.setRightComponent(panelMesasTabla);
-		panelMesasTabla.setLayout(new MigLayout("", "[1px]", "[1px]"));
+		this.visibilidadPanelModificacionMesa(false);
+		
+		
 		
 		table = new JTable();
-		table.setFillsViewportHeight(true);
-		panelMesasTabla.add(table, "cell 0 0,alignx left,aligny top");
+		splitPane.setRightComponent(table);
+		
+		JPanel panelExamenes = new JPanel();
+		tabbedPane.addTab("Examenes", null, panelExamenes, null);
+		
+		JButton btnNewButton = new JButton("New button");
+		panelExamenes.add(btnNewButton);
+		
+		JPanel panelMaterias = new JPanel();
+		tabbedPane.addTab("Materias", null, panelMaterias, null);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		panelMaterias.add(chckbxNewCheckBox);
+		
+		JPanel panelUsuarios = new JPanel();
+		tabbedPane.addTab("Usuarios", null, panelUsuarios, null);
+		
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		panelUsuarios.add(lblNewLabel);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		
+		JMenu menuOpciones = new JMenu("Opciones");
+		menuOpciones.setHorizontalAlignment(SwingConstants.LEFT);
+		menuBar.add(menuOpciones);
+		
+		JMenuItem menuItemSalir = new JMenuItem("Salir");
+		menuOpciones.add(menuItemSalir);
+		
+		JSeparator separator = new JSeparator();
+		menuOpciones.add(separator);
+		
+		JMenuItem menuItemAcerca = new JMenuItem("Acerca");
+		menuOpciones.add(menuItemAcerca);
+	}
+	
+	public void visibilidadPanelModificacionMesa(Boolean visible) {
+		panelEdicionMesa.setVisible(visible);
+	}
+	
+	public void eliminarTab(String nombreTab) {
+		this.tabbedPane.removeTabAt(tabbedPane.indexOfTab(nombreTab));
+	}
+	
+	public void cancelarEdicionMesa() {
+		this.valorFechaInicioMesa.setText(null);
+		this.valorFechaFinMesa.setText(null);
+		this.valorFechaInicioInscripcionMesa.setText(null);
+		this.valorFechaFinInscripcionMesa.setText(null);
+		visibilidadPanelModificacionMesa(false);
+	}
+	
+	public void editarMesa(String fechaInicioMesa, String fechaFinMesa, String fechaInicioInscripcion, String fechaFinInscripcion) {
+		this.valorFechaInicioMesa.setValue(fechaInicioMesa);
+		this.valorFechaFinMesa.setValue(fechaFinMesa);
+		this.valorFechaInicioInscripcionMesa.setValue(fechaInicioInscripcion);
+		this.valorFechaFinInscripcionMesa.setValue(fechaFinInscripcion);
+		visibilidadPanelModificacionMesa(true);
 	}
 }

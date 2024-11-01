@@ -24,9 +24,6 @@ public class Mesa {
     private Timestamp fechaFinInscripcion;
     private Timestamp fechaCreacion;
 
-    @OneToMany // Relación uno a muchos con Examen
-    private List<Examen> examenes; // Definición de la propiedad examenes
-
     public Mesa(Long id, Timestamp fechaInicio, Timestamp fechaFin, 
                 Timestamp fechaInicioInscripcion, Timestamp fechaFinInscripcion, 
                 Timestamp fechaCreacion) {
@@ -88,13 +85,4 @@ public class Mesa {
         this.fechaCreacion = fechaCreacion;
     }
 
-    // Método getter para la propiedad examenes
-    public List<Examen> getExamenes() {
-        return examenes;
-    }
-
-    // Método setter para la propiedad examenes
-    public void setExamenes(List<Examen> examenes) {
-        this.examenes = examenes;
-    }
 }

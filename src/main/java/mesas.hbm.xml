@@ -13,12 +13,6 @@
         <property name="fechaInicioInscripcion" column="fecha_inicio_inscripcion" type="timestamp"/>
         <property name="fechaFinInscripcion" column="fecha_fin_inscripcion" type="timestamp"/>
         <property name="fechaCreacion" column="fecha_creacion" type="timestamp"/>
-
-        <!-- Relación One-to-Many con Examenes -->
-        <set name="examenes" table="examenes" cascade="all">
-            <key column="mesa_id"/>
-            <one-to-many class="inscripcionExamen.Examen"/>
-        </set>
        
     </class>
 </hibernate-mapping>

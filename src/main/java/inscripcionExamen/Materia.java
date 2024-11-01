@@ -19,7 +19,6 @@ public class Materia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private List<Examen> examenes; // o el tipo que corresponda
-    private List<InscripcionMateria> inscripciones; // Definición de la propiedad
     private String nombre;
     private Timestamp fechaCreacion;
 
@@ -31,16 +30,6 @@ public class Materia {
     
 
     public Materia() {}
-    
-    // Método getter para la propiedad inscripciones
-    public List<InscripcionMateria> getInscripciones() {
-        return inscripciones;
-    }
-
-    // Método setter para la propiedad inscripciones
-    public void setInscripciones(List<InscripcionMateria> inscripciones) {
-        this.inscripciones = inscripciones;
-    }
     
     public List<Examen> getExamenes() {
         return examenes;
