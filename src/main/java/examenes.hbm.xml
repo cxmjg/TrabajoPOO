@@ -19,16 +19,10 @@
         <many-to-one name="materia" class="inscripcionExamen.Materia" column="materia_id" not-null="true"/>
 
         <!-- Relación Many-to-One con Docente 1 -->
-        <many-to-one name="docente1" class="inscripcionExamen.Usuario" column="docente1_id" not-null="true"/>
+        <many-to-one name="docenteTitular" class="inscripcionExamen.Usuario" column="docenteTitular_id" not-null="true"/>
 
         <!-- Relación Many-to-One con Docente 2 -->
-        <many-to-one name="docente2" class="inscripcionExamen.Usuario" column="docente2_id" not-null="true"/>
-
-        <!-- Relación One-to-Many con InscripcionExamen -->
-        <set name="inscripciones" table="inscripciones_examen" cascade="all">
-            <key column="examen_id"/>
-            <one-to-many class="inscripcionExamen.InscripcionExamen"/>
-        </set>
+        <many-to-one name="docenteVocal" class="inscripcionExamen.Usuario" column="docenteVocal_id" not-null="true"/>
 
 
 

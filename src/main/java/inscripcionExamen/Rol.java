@@ -1,51 +1,46 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package inscripcionExamen;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.util.List;
+import jakarta.persistence.*;
+import java.util.Set;
 
-/**
- *
- * @author Usuario
- */
+@Entity
+@Table(name = "roles")
 public class Rol {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private Long id;
+    private int id;
+
     private String nombre;
     private String descripcion;
-     private List<Usuario> usuarios; // Definición de la propiedad
 
-    public Rol(Long id, String nombre, String descripcion) {
+    @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
+    private Set<Usuario> usuarios; 
+
+    public Rol() {}
+
+    public Rol(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-    
-    public Rol() {};
-    
-    // Método getter
-    public List<Usuario> getUsuarios() {
+
+    // Método getter para usuarios
+    public Set<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    // Método setter (opcional, si necesitas)
-    public void setUsuarios(List<Usuario> usuarios) {
+    // Método setter para usuarios
+    public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
-    public Long getId() {
+    // Getters y setters para los otros atributos
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

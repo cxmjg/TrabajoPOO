@@ -3,6 +3,10 @@ package inscripcionExamen;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.List; // Asegúrate de importar List si no lo has hecho
 
@@ -13,46 +17,46 @@ import java.util.List; // Asegúrate de importar List si no lo has hecho
 public class Examen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    private Timestamp fecha;
+    private Date fecha;
     private boolean habilitado;
     private Timestamp fechaCreacion;
-    private Usuario docente1; // Definición de la propiedad docente1
-    private Usuario docente2; // Definición de la propiedad docente2
-    private List<InscripcionMateria> inscripciones; // Definición de la propiedad inscripciones
+    private Usuario docenteTitular; // Definición de la propiedad docente1
+    private Usuario docenteVocal; // Definición de la propiedad docente2
     private Materia materia; // Definición de la propiedad materia
+    @ManyToOne
+    @JoinColumn(name = "mesa_id", nullable = false)
     private Mesa mesa; // Definición de la propiedad mesa
 
-    public Examen(Long id, Timestamp fecha, boolean habilitado, Timestamp fechaCreacion, 
-                  Usuario docente1, Usuario docente2, List<InscripcionMateria> inscripciones, 
+    public Examen(int id, Date fecha, boolean habilitado, Timestamp fechaCreacion, 
+                  Usuario docenteTitular, Usuario docenteVocal, 
                   Materia materia, Mesa mesa) { // Se agrega mesa al constructor
         this.id = id;
         this.fecha = fecha;
         this.habilitado = habilitado;
         this.fechaCreacion = fechaCreacion;
-        this.docente1 = docente1; // Inicialización de la propiedad docente1
-        this.docente2 = docente2; // Inicialización de la propiedad docente2
-        this.inscripciones = inscripciones; // Inicialización de la propiedad inscripciones
+        this.docenteTitular = docenteTitular; // Inicialización de la propiedad docente1
+        this.docenteVocal = docenteVocal; // Inicialización de la propiedad docente2
         this.materia = materia; // Inicialización de la propiedad materia
         this.mesa = mesa; // Inicialización de la propiedad mesa
     }
 
     public Examen() {}
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Timestamp getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Timestamp fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -72,28 +76,20 @@ public class Examen {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Usuario getDocente1() { // Método getter para docente1
-        return docente1;
+    public Usuario getdocenteTitular() { // Método getter para docente1
+        return docenteTitular;
     }
 
-    public void setDocente1(Usuario docente1) { // Método setter para docente1
-        this.docente1 = docente1;
+    public void setdocenteTitular(Usuario docenteTitular) { // Método setter para docente1
+        this.docenteTitular = docenteTitular;
     }
 
-    public Usuario getDocente2() { // Método getter para docente2
-        return docente2;
+    public Usuario getdocenteVocal() { // Método getter para docente2
+        return docenteVocal;
     }
 
-    public void setDocente2(Usuario docente2) { // Método setter para docente2
-        this.docente2 = docente2;
-    }
-
-    public List<InscripcionMateria> getInscripciones() { // Método getter para inscripciones
-        return inscripciones;
-    }
-
-    public void setInscripciones(List<InscripcionMateria> inscripciones) { // Método setter para inscripciones
-        this.inscripciones = inscripciones;
+    public void setdocenteVocal(Usuario docenteVocal) { // Método setter para docente2
+        this.docenteVocal = docenteVocal;
     }
 
     public Materia getMateria() { // Método getter para materia

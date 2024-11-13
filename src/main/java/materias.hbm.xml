@@ -10,6 +10,7 @@
         <!-- Mapeo de las propiedades -->
         <property name="nombre" column="nombre" type="string"/>
         <property name="fechaCreacion" column="fecha_creacion" type="timestamp"/>
+        <property name="habilitado" column="habilitado"/>
        
     </class>
 </hibernate-mapping>

@@ -17,15 +17,17 @@ import java.util.List;
 public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private List<Examen> examenes; // o el tipo que corresponda
     private String nombre;
     private Timestamp fechaCreacion;
+    private boolean habilitado;
 
-    public Materia(Long id, String nombre, Timestamp fechaCreacion) {
+    public Materia(int id, String nombre, Timestamp fechaCreacion, boolean habilitado) {
         this.id = id;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
+        this.habilitado = habilitado;
     }
     
 
@@ -39,11 +41,11 @@ public class Materia {
         this.examenes = examenes;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,4 +64,13 @@ public class Materia {
     public void setFechaCreacion(Timestamp fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
+    
+    public boolean getHabilitado() {
+		return habilitado;
+	}
+
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
+	}
 }

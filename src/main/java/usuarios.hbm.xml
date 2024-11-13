@@ -1,23 +1,22 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-                                   "http://www.hibernate.org/dtd/hibernate-mapping">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping">
 <hibernate-mapping>
- <class name="inscripcionExamen.Usuario" table="usuarios">
-  <!-- Mapeo de la clave primaria -->
-  <id column="id" name="id">
-   <generator class="identity"/>
-  </id>
-  <!-- Mapeo de las propiedades -->
-  <property column="email" generated="never" lazy="false" name="email" type="string"/>
-  <property column="contrasena" generated="never" lazy="false"
-   name="contrasena" not-null="true" type="string"/>
-  <property column="nombre" generated="never" lazy="false" name="nombre"
-   not-null="true" type="string"/>
-  <property column="apellido" generated="never" lazy="false"
-   name="apellido" type="string"/>
-  <property column="habilitado" generated="never" lazy="false"
-   name="habilitado" not-null="true" type="boolean"/>
-  <property column="fecha_creacion" generated="never" lazy="false"
-   name="fechaCreacion" not-null="true" type="timestamp"/>
- </class>
+    <class name="inscripcionExamen.Usuario" table="usuarios">
+
+        <!-- Mapeo de la clave primaria -->
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+
+        <!-- Mapeo de las propiedades -->
+        <property name="contrasena" column="contrasena"/>
+        <property name="nombre" column="nombre"/>
+        <property name="apellido" column="apellido"/>
+        <property name="email" column="email"/>
+        <property name="habilitado" column="habilitado"/>
+        <property name="fechaCreacion" column="fecha_creacion" type="timestamp"/>
+
+        <!-- Relación Many-to-One con Rol -->
+        <many-to-one name="rol" class="inscripcionExamen.Rol" column="rol_id" not-null="false"/>
+        
+    </class>
 </hibernate-mapping>

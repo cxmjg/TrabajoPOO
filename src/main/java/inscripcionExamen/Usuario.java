@@ -2,28 +2,28 @@ package inscripcionExamen;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
     private String contrasena;
     private String nombre;
     private String apellido;
     private String email;
-    
+
     @ManyToOne
-    @JoinColumn(name = "rol_id", nullable = false)
+    @JoinColumn(name = "rol_id", nullable = true)
     private Rol rol;
-    
+
     private boolean habilitado;
     private Timestamp fechaCreacion;
+
     public Usuario() {}
 
-    public Usuario(Long id, String contrasena, String nombre, String apellido, String email,
+    public Usuario(int id, String contrasena, String nombre, String apellido, String email,
                    Rol rol, boolean habilitado, Timestamp fechaCreacion) {
         this.id = id;
         this.contrasena = contrasena;
@@ -37,11 +37,11 @@ public class Usuario {
 
     // Getters y Setters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
